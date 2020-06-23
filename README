@@ -11,6 +11,9 @@ To upload own property and background file mention:
 -p Property file name (default aaindex file)
 -b Background file name (default humansequencessp file)
 
+To run GUI
+Execute Tool_gui.py on terminal to run the GUI version
+
 Output:
 (1) P-value and plot for the particular index 
     for all sequences from input file 
