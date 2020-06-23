@@ -1,0 +1,23 @@
+Protein Property Calculator Tool version 1
+A tool to analyse molecular propertiesof Protein sequences,Identify Signal Peptides
+and Compare with Background Dataset
+
+Input:
+To run the Program on terminal:
+main.py -i set1.txt -d ANDN920101 (set1.txt is an example of input file)
+where -i is the input set of sequences
+      -d is the property index from AA Index
+To upload own property and background file mention:
+-p Property file name (default aaindex file)
+-b Background file name (default humansequencessp file)
+
+Output:
+(1) P-value and plot for the particular index 
+    for all sequences from input file 
+(2) Parsed result from Phobius indication Signal Peptides 
+    and their position
+(3) N, H and C region feauture plots
+
+This tool utilizes Phobius(A hidden Markov Model capable of predicting both Transmembrane Topology 
+and Signal peptides for detecting Signal Peptides)
+(c) 2004 Lukas Kall, Anders Krogh, Erik Sonnhammer
