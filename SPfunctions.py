@@ -79,10 +79,10 @@ class SP_functions:
         print(stats.ttest_ind(hyd1,hyd2))
         print(stats.ttest_ind(len1,len2))'''
 
-        fig1 = output.plot_for_aa(output,len1,len2,"H-region Length")
-        fig2 = output.plot_for_aa(output, charge1, charge2, "N-region charge")
-        fig3 = output.plot_for_aa(output, pol1, pol2, "C-region Polarity")
-        fig4 = output.plot_for_aa(output, hyd1, hyd2, "H-region Hydrophobicity")
+        fig1 = output.plot_for_aa(len1,len2,"H-region Length")
+        fig2 = output.plot_for_aa(charge1, charge2, "N-region charge")
+        fig3 = output.plot_for_aa(pol1, pol2, "C-region Polarity")
+        fig4 = output.plot_for_aa(hyd1, hyd2, "H-region Hydrophobicity")
 
         top = tk.Toplevel()
 

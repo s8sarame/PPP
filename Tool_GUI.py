@@ -32,24 +32,24 @@ def go_press():
 
     if input_file.rsplit(".")[-1] != "txt":
         return messagebox.showerror(title="Error", message="Filename must end in .txt")
-    if input_file is '':
+    if input_file == '':
         return messagebox.showwarning('Warning',  'Empty Field')
 
     if backgroundfile.rsplit(".")[-1] != "txt":
         return messagebox.showerror(title="Error", message="Filename must end in .txt")
-    if backgroundfile is '':
+    if backgroundfile == '':
         return messagebox.showwarning('Warning',  'Empty Field')
 
-    if propertyid is '':
+    if propertyid == '':
         return messagebox.showwarning('Warning',  'Empty Field')
 
-    if propertyfile is '':
+    if propertyfile == '':
         return messagebox.showwarning('Warning',  'Empty Field')
 
     if "aaindex1.txt" in propertyfile:
-        SearchAA.AAindex_property(SearchAA, input_file, propertyfile, propertyid, backgroundfile)
+        SearchAA.AAindex_property(input_file, propertyfile, propertyid, backgroundfile)
     else:
-        SearchAA.user_property(SearchAA, input_file, propertyfile, backgroundfile)
+        SearchAA.user_property(input_file, propertyfile, backgroundfile)
 
     SignalPeptide(input_file, backgroundfile)
     import time

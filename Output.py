@@ -12,7 +12,8 @@ class output:
         self.l2 = l2
         self.xlabel = xlabel
 
-     def plot_for_aa(self,l1,l2,x_label): #to plot the frequency against the required property in both the sets of sequences
+     @staticmethod
+     def plot_for_aa(l1,l2,x_label): #to plot the frequency against the required property in both the sets of sequences
         counter = collections.Counter(l1)
         counter2 = collections.Counter(l2)
 

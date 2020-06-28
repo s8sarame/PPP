@@ -9,7 +9,9 @@ class Input:
         self.csvfile = csvfile
         self.Sequence_file(filename)
         self.background(csvfile)
-    def Sequence_file(self,filename):
+
+    @staticmethod
+    def Sequence_file(filename):
         valid_seq = []
         non_val_seq = []
         with open(filename) as f:

@@ -18,8 +18,8 @@ class SearchAA():
 
 
 
-
-    def retrive_dict(self, index_id, lines): #parses required Index information from AAIndex file according to the property required
+    @staticmethod
+    def retrive_dict(index_id, lines): #parses required Index information from AAIndex file according to the property required
         for i in range(0, len(lines)):
             line = lines[i]
             if len(line) > 0 and line[0] == 'H':
@@ -54,7 +54,8 @@ class SearchAA():
                         line = lines[i]
 
                     return mapping
-    def Map(self,dict1,sequence):
+    @staticmethod
+    def Map(dict1,sequence):
 
 
 
@@ -65,7 +66,8 @@ class SearchAA():
         avg_2 = round(avg,2)
         return(avg_2)
 
-    def calculatecharge(self,li): #to calculate charge on peptide sequence
+    @staticmethod
+    def calculatecharge(li): #to calculate charge on peptide sequence
 
         charge = 0
         for aa in li:
@@ -77,20 +79,23 @@ class SearchAA():
                 charge = charge
         return charge
 
-    def functions(self,list_of_sequences,dict1): #A function which calls property calculator functions to set of sequences and returns the average result
+    @staticmethod
+    def functions(list_of_sequences,dict1): #A function which calls property calculator functions to set of sequences and returns the average result
         avg_lst = []
 
         chargelist = []
 
         for sequence in list_of_sequences:
 
-            ave = self.Map(self,dict1,sequence)
+            ave = SearchAA.Map(dict1,sequence)
 
             avg_lst.append(ave)
 
 
         return avg_lst, chargelist
-    def length(self,list): # Calculates the length of every sequence in set and finds it mean and standard deviation
+
+    @staticmethod
+    def length(list): # Calculates the length of every sequence in set and finds it mean and standard deviation
         lengths = []
         for i in list:
             length = len(i)
@@ -100,25 +105,26 @@ class SearchAA():
         sd_ = std(lengths)
         return lengths,avg_length,sd_
 
-    def output_(self,dict1,inp,bkg):
-        sequences = Input.Sequence_file(Input, inp)
+    @staticmethod
+    def output_(dict1,inp,bkg):
+        sequences = Input.Sequence_file(inp)
 
-        background = Input.Sequence_file(Input, bkg)
-        length1 = self.length(self,sequences)[0]
-        mean_1 = self.length(self,sequences)[1]
-        stdev1 = self.length(self,sequences)[2]
+        background = Input.Sequence_file(bkg)
+        length1 = SearchAA.length(sequences)[0]
+        mean_1 = SearchAA.length(sequences)[1]
+        stdev1 = SearchAA.length(sequences)[2]
 
-        length2 = self.length(self,background)[0]
-        mean_2 = self.length(self,background)[1]
-        stdev2 = self.length(self,background)[2]
+        length2 = SearchAA.length(background)[0]
+        mean_2 = SearchAA.length(background)[1]
+        stdev2 = SearchAA.length(background)[2]
 
-        avg_lst1 = self.functions(self,sequences, dict1)[0]
+        avg_lst1 = SearchAA.functions(sequences, dict1)[0]
 
-        avg_background = self.functions(self,background, dict1)[0]
+        avg_background = SearchAA.functions(background, dict1)[0]
 
         pval = stats.ttest_ind(avg_lst1,avg_background, equal_var= False)[1]
-        figure1 = output.plot_for_aa(output, length1, length2, "Average Length")
-        figure2 = output.plot_for_aa(output,avg_lst1,avg_background,"Average Property")
+        figure1 = output.plot_for_aa(length1, length2, "Average Length")
+        figure2 = output.plot_for_aa(avg_lst1,avg_background,"Average Property")
 
         top = tk.Toplevel()
         top.title("Results")
@@ -145,27 +151,27 @@ class SearchAA():
         std2 = tk.Label(top, text="Standard deviation of length of background sequences is: {}".format(stdev2)).pack(
             side=tk.BOTTOM)
 
-
-    def AAindex_property(self,inputfile,propertyf, property,background): # Applies AA index property to set of sequences
+    @staticmethod
+    def AAindex_property(inputfile,propertyf, property,background): # Applies AA index property to set of sequences
 
         file_id = open(propertyf, 'r')
         lines = file_id.readlines()
         user_ID = property
 
-        dict1 = self.retrive_dict(self,user_ID,lines)
+        dict1 = SearchAA.retrive_dict(user_ID,lines)
 
         file_id.close()
-        self.output_(self,dict1,inputfile,background)
+        SearchAA.output_(dict1,inputfile,background)
 
 
-        
-    def user_property(self,inputfile, property,background): # Applies user property to set of sequences
+    @staticmethod
+    def user_property(inputfile, property,background): # Applies user property to set of sequences
         reader = csv.reader(open(property, 'r'))
         dict1 = {}
         for k,v in reader:
             dict1[k] = v
 
-        self.output_(dict1,inputfile,background)
+        SearchAA.output_(dict1,inputfile,background)
 
 
 
